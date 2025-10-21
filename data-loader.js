@@ -408,11 +408,11 @@ class PortfolioDataLoader {
                         ${techTags}
                     </div>
                     <div class="project-links">
-                        <a href="${project.links.github}" class="project-btn">
+                        <a href="${project.links.github}" class="project-btn" target="_blank" rel="noopener noreferrer">
                             <i class="fab fa-github"></i>
                             Code
                         </a>
-                        <a href="${project.links.demo}" class="project-btn">
+                        <a href="${project.links.demo}" class="project-btn" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-play"></i>
                             Demo
                         </a>
@@ -420,9 +420,13 @@ class PortfolioDataLoader {
                 </div>
             `;
 
-            // Open modal on click anywhere on card or overlay button
+            // Open modal on click the card, but ignore clicks on Code/Demo buttons
             projectCard.addEventListener('click', (e) => {
-                // avoid navigating external link default
+                if (e.target && (e.target.closest('.project-btn'))) {
+                    // allow default navigation for buttons
+                    e.stopPropagation();
+                    return;
+                }
                 e.preventDefault();
                 this.openProjectModal(project);
             });
@@ -434,6 +438,15 @@ class PortfolioDataLoader {
                     this.openProjectModal(project);
                 });
             }
+
+            // Ensure Code/Demo clicks don't bubble to card
+            const projectButtons = projectCard.querySelectorAll('.project-btn');
+            projectButtons.forEach((btn) => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // let default anchor behavior occur (open in new tab)
+                });
+            });
 
             projectsGrid.appendChild(projectCard);
         });
