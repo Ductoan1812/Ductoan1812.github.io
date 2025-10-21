@@ -1,0 +1,97 @@
+{
+  "categories": [
+    {
+      "title": "Game Development",
+      "icon": "fas fa-gamepad",
+      "skills": [
+        {
+          "name": "Unity",
+          "icon": "fab fa-unity",
+          "percentage": 85  
+        },
+        {
+          "name": "C#",
+          "icon": "fas fa-code",
+          "percentage": 90  
+        },
+        {
+          "name": "Shader Programming (ShaderLab/HLSL)",  
+          "icon": "fas fa-paint-brush",
+          "percentage": 75 
+        },
+        {
+          "name": "Gameplay Programming", 
+          "icon": "fas fa-code-branch",
+          "percentage": 80
+        },
+        {
+          "name": "Game Optimization",
+          "icon": "fas fa-tachometer-alt",
+          "percentage": 70
+        }
+      ]
+    },
+    {
+      "title": "Tools & Technologies",
+      "icon": "fas fa-tools",
+      "skills": [
+        {
+          "name": "Git/GitHub",
+          "icon": "fab fa-git-alt",
+          "percentage": 85  
+        },
+        {
+          "name": "Visual Studio",
+          "icon": "fas fa-laptop-code",
+          "percentage": 85
+        },
+        {
+          "name": "Aseprite",
+          "icon": "fas fa-pencil-alt",
+          "percentage": 65
+        },
+        {
+          "name": "Photoshop",
+          "icon": "fas fa-image",
+          "percentage": 70
+        }
+      ]
+    },
+    {
+      "title": "Soft Skills",
+      "icon": "fas fa-users",
+      "skills": [
+        {
+          "name": "Teamwork & Collaboration",
+          "icon": "fas fa-handshake",
+          "percentage": 85
+        },
+        {
+          "name": "Problem Solving",
+          "icon": "fas fa-puzzle-piece",
+          "percentage": 90
+        },
+        {
+          "name": "Creative Thinking",
+          "icon": "fas fa-lightbulb",
+          "percentage": 88
+        },
+        {
+          "name": "Time Management",
+          "icon": "fas fa-clock",
+          "percentage": 80
+        },
+        {
+          "name": "Communication",
+          "icon": "fas fa-comments",
+          "percentage": 85
+        },
+        {
+          "name": "Adaptability",
+          "icon": "fas fa-sync-alt",
+          "percentage": 82
+        }
+      ]
+    }
+  ]
+}

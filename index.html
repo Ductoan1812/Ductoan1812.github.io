@@ -23,6 +23,10 @@
                 <li><a href="#skills" class="nav-link">Kỹ năng</a></li>
                 <li><a href="#contact" class="nav-link">Liên hệ</a></li>
             </ul>
+            <div class="language-toggle" id="language-toggle" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(255,255,255,0.1); border-radius: 6px; cursor: pointer; transition: all 0.3s ease; margin-right: 10px;">
+                <span id="language-flag" style="font-size: 16px;">🇻🇳</span>
+                <span id="language-text" style="font-size: 14px; font-weight: 500;">VN</span>
+            </div>
             <div class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -105,6 +109,19 @@
             </div>
         </div>
     </section>
+
+    <!-- Project Detail Modal -->
+    <div id="project-modal" class="modal" style="display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; overflow-y: auto;">
+        <div class="modal-content" style="max-width: 900px; margin: 20px auto; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.25); min-height: calc(100vh - 40px);">
+            <div class="modal-header" style="display:flex; justify-content: space-between; align-items:center; padding:16px 20px; border-bottom:1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 10;">
+                <h3 id="modal-title" style="margin:0; font-size: 1.4rem;">Project title</h3>
+                <button id="modal-close" aria-label="Close" style="background:none; border:none; font-size:22px; cursor:pointer;">×</button>
+            </div>
+            <div class="modal-body" id="modal-body" style="padding: 0; max-height: calc(100vh - 80px); overflow-y: auto;">
+                <!-- Filled by JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
@@ -311,48 +328,8 @@
                         dự án game mới hoặc chỉ đơn giản là chia sẻ kinh nghiệm.
                     </p>
                     <div class="contact-methods">
-                        <div class="contact-method">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>Toan.tq.hy.24@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fab fa-linkedin"></i>
-                            <div>
-                                <h4>LinkedIn</h4>
-                                <p>Nông Đức Toàn</p>
-                            </div>
-                        </div>
-                        <div class="contact-method">
-                            <i class="fab fa-github"></i>
-                            <div>
-                                <h4>GitHub</h4>
-                                <p>@yourusername</p>
-                            </div>
-                        </div>
+                        <!-- Contact methods will be populated by JavaScript -->
                     </div>
-                </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Tên của bạn" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Chủ đề" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Nội dung tin nhắn" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-paper-plane"></i>
-                            Gửi tin nhắn
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -380,6 +357,7 @@
         </div>
     </footer>
 
+    <script src="data-loader.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

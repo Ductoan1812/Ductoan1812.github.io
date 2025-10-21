@@ -1,0 +1,57 @@
+{
+  "personal": {
+    "name": "Nông Đức Toàn",
+    "title": "Game Developer",
+    "email": "Toan.tq.hy.24@gmail.com",
+    "github": "https://github.com/Ductoan1812",
+    "linkedin": "https://www.linkedin.com/in/to%C3%A0n-n%C3%B4ng-%C4%91%E1%BB%A9c-0b67a038b/",
+    "phone": "0348438004",
+    "zalo": "https://zalo.me/0348438004",
+    "facebook": "https://www.facebook.com/ductoann04/"
+  },
+  "hero": {
+    "title": "Game Developer",
+    "subtitle": "Tạo ra những trải nghiệm đáng nhớ",
+    "description": "Chuyên phát triển game với Unity, tạo ra những sản phẩm chất lượng cao và trải nghiệm người chơi tuyệt vời.",
+    "buttons": {
+      "primary": {
+        "text": "Xem dự án",
+        "icon": "fas fa-play",
+        "link": "#projects"
+      },
+      "secondary": {
+        "text": "Liên hệ",
+        "icon": "fas fa-envelope",
+        "link": "#contact"
+      }
+    }
+  },
+  "about": {
+    "title": "Xin chào! Tôi là Nông Đức Toàn",
+    "description": "Tôi là một Game Developer đam mê với việc tạo ra những trải nghiệm game thú vị và hấp dẫn. Với kinh nghiệm phát triển game trên Unity và các công nghệ hiện đại, tôi luôn tìm kiếm những thách thức mới để nâng cao kỹ năng và tạo ra những sản phẩm chất lượng",
+    "stats": [
+      {
+        "number": "< 1",
+        "label": "Năm kinh nghiệm"
+      },
+      {
+        "number": "1",
+        "label": "Dự án đang phát triển"
+      },
+      {
+        "number": "0",
+        "label": "Prototype đã tạo"
+      }
+    ],
+    "image": {
+      "placeholder": false,
+      "src": "images/profile/ductoan_avatar.jpg",
+      "alt": "Nông Đức Toàn",
+      "icon": "fas fa-user",
+      "text": "Ảnh cá nhân"
+    }
+  },
+  "footer": {
+    "copyright": "2024 Nông Đức Toàn. Tất cả quyền được bảo lưu."
+  }
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Data Loader</title>
+</head>
+<body>
+    <h1>Test Data Loader</h1>
+    <div id="test-results"></div>
+    
+    <script src="data-loader.js"></script>
+    <script>
+        // Test if data is loaded
+        setTimeout(() => {
+            const results = document.getElementById('test-results');
+            results.innerHTML = `
+                <h2>Data Loader Test Results:</h2>
+                <p><strong>Profile loaded:</strong> ${window.portfolioData ? 'Yes' : 'No'}</p>
+                <p><strong>Skills loaded:</strong> ${window.skillsData ? 'Yes' : 'No'}</p>
+                <p><strong>Projects loaded:</strong> ${window.projectsData ? 'Yes' : 'No'}</p>
+                <p><strong>Contact loaded:</strong> ${window.contactData ? 'Yes' : 'No'}</p>
+                <hr>
+                <h3>Profile Data:</h3>
+                <pre>${JSON.stringify(window.portfolioData, null, 2)}</pre>
+            `;
+        }, 2000);
+    </script>
+</body>
+</html>

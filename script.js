@@ -20,12 +20,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             const navbarHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = target.offsetTop - navbarHeight - 20;
+            let targetPosition;
+            
+            // Special handling for about section to ensure hero section is completely hidden
+            if (target.id === 'about') {
+                targetPosition = target.offsetTop - navbarHeight - 60;
+            } else {
+                targetPosition = target.offsetTop - navbarHeight - 30;
+            }
+            
+            // Ensure we don't scroll above the page
+            targetPosition = Math.max(0, targetPosition);
+            
+            // Reset hero section transform when navigating to other sections
+            if (target.id !== 'home') {
+                // Force immediate reset using requestAnimationFrame
+                requestAnimationFrame(() => {
+                    const hero = document.querySelector('.hero');
+                    if (hero) {
+                        hero.style.transform = 'translateY(0px)';
+                        parallaxEnabled = false;
+                    }
+                });
+            }
             
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
+            
+            // Re-enable parallax after scroll completes
+            if (target.id !== 'home') {
+                setTimeout(() => {
+                    parallaxEnabled = true;
+                }, 500);
+            }
         }
     });
 });
@@ -100,13 +129,38 @@ if (contactForm) {
     });
 }
 
-// Parallax effect for hero section
+// Flag to control parallax effect
+let parallaxEnabled = true;
+
+// Function to reset hero section transform
+function resetHeroTransform() {
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        hero.style.transform = 'translateY(0px)';
+        parallaxEnabled = false; // Disable parallax temporarily
+        setTimeout(() => {
+            parallaxEnabled = true; // Re-enable after a short delay
+        }, 100);
+    }
+}
+
+// Parallax effect for hero section - only apply when hero is visible
 window.addEventListener('scroll', () => {
+    if (!parallaxEnabled) return; // Skip if parallax is disabled
+    
     const scrolled = window.pageYOffset;
     const parallax = document.querySelector('.hero');
+    const heroHeight = parallax ? parallax.offsetHeight : 0;
+    
     if (parallax) {
-        const speed = scrolled * 0.5;
-        parallax.style.transform = `translateY(${speed}px)`;
+        // Only apply parallax when hero section is still visible
+        if (scrolled < heroHeight * 0.8) { // Start resetting earlier
+            const speed = scrolled * 0.3; // Reduced speed
+            parallax.style.transform = `translateY(${speed}px)`;
+        } else {
+            // Reset transform when hero is not visible
+            parallax.style.transform = 'translateY(0px)';
+        }
     }
 });
 

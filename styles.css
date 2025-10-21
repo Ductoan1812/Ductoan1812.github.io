@@ -7,7 +7,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* Account for fixed navbar height */
+    scroll-padding-top: 120px; /* Account for fixed navbar height + extra space */
 }
 
 .container {
@@ -243,6 +243,11 @@ section {
 /* Add padding-top to sections to avoid navbar overlap */
 section:not(#home) {
     padding-top: 7rem;
+}
+
+/* Ensure hero section doesn't overlap with about section */
+#about {
+    margin-top: -2rem; /* Pull up slightly to hide hero section completely */
 }
 
 .section-title {

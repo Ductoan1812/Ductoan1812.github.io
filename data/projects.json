@@ -1,0 +1,49 @@
+{
+  "projects": [
+    {
+      "title": "Immortal Legend",
+      "subtitle": "Tu Tiên Truyền - 2D Top-Down RPG",
+      "description": "Game RPG 2D Top-Down chủ đề tu tiên với gameplay phức tạp và hệ thống tu luyện đa dạng",
+      "icon": "fas fa-gamepad",
+      "image": "images/projects/immortal-legend_Logo.webp",
+      "technologies": ["Unity", "C#", "JSON.NET", "Addressable", "Event-Driven Architecture", "Tilemap", "Cinemachine", "Animation 2D"],
+      "role": "Lead Developer / Gameplay Programmer",
+      "status": "09/2025 - Đang phát triển",
+      "features": [
+        "Hệ thống tu luyện với 7 chỉ số: Đạo hạnh, Căn cốt, Linh căn, Ngộ tính, Phúc duyên, Thiên phú, Tu chất",
+        "Hệ thống Kho đồ & Trang bị với drag & drop, asynchronous resource loading",
+        "Hệ thống Chiến đấu real-time với event-driven architecture và critical hit mechanism",
+        "Hệ thống quản lý người chơi sử dụng Singleton pattern và JSON serialization",
+        "Hệ thống giao diện với drag & drop và real-time stat updates",
+        "Hệ thống Event Bus custom hỗ trợ decoupled communication"
+      ],
+      "achievements": [
+        "Hoàn thành toàn bộ event-driven architecture với hơn 50 loại events",
+        "Phát triển hệ thống tu luyện tính toán derived stats",
+        "Phát triển drag & drop inventory và equipment system",
+        "Tối ưu performance qua caching, asynchronous loading và memory management",
+        "Phát triển UI real-time động",
+        "Viết Tool Editor thực hiện debug và quản lý dữ liệu game"
+      ],
+      "skills": [
+        "C# nâng cao",
+        "Unity 2D", 
+        "Event-driven programming",
+        "Tilemap",
+        "Cinemachine",
+        "Animation 2D",
+        "JSON serialization",
+        "Performance optimization"
+      ],
+      "media": {
+        "type": "video",
+        "url": "https://www.youtube.com/embed/t0glDqwyEHA"
+      },
+      "links": {
+        "github": "https://github.com/Ductoan1812/Immortal-Legend",
+        "demo": "https://www.youtube.com/watch?v=t0glDqwyEHA&list=RDt0glDqwyEHA&start_radio=1",
+        "external": ""
+      }
+    }
+  ]
+}

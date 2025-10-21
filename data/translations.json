@@ -1,0 +1,136 @@
+{
+  "en": {
+    "navigation": {
+      "home": "Home",
+      "about": "About",
+      "projects": "Projects",
+      "skills": "Skills",
+      "contact": "Contact"
+    },
+    "hero": {
+      "title": "Game Developer",
+      "subtitle": "Creating memorable experiences",
+      "description": "Specializing in game development with Unity, creating high-quality products and excellent player experiences.",
+      "buttons": {
+        "primary": {
+          "text": "View Projects",
+          "icon": "fas fa-play",
+          "link": "#projects"
+        },
+        "secondary": {
+          "text": "Contact",
+          "icon": "fas fa-envelope",
+          "link": "#contact"
+        }
+      }
+    },
+    "about": {
+      "title": "Hello! I'm Nông Đức Toàn",
+      "description": "I am a Game Developer passionate about creating interesting and engaging game experiences. With experience in game development on Unity and modern technologies, I always seek new challenges to improve my skills and create quality products.",
+      "stats": [
+        {
+          "number": "< 1",
+          "label": "Years of experience"
+        },
+        {
+          "number": "1",
+          "label": "Project in development"
+        },
+        {
+          "number": "0",
+          "label": "Prototypes created"
+        }
+      ],
+      "image": {
+        "placeholder": false,
+        "src": "images/profile/ductoan_avatar.jpg",
+        "alt": "Nông Đức Toàn",
+        "icon": "fas fa-user",
+        "text": "Personal photo"
+      }
+    },
+    "projects": {
+      "title": "Featured Projects",
+      "description": "2D Top-Down RPG game with cultivation theme featuring complex gameplay and diverse cultivation systems",
+      "modal": {
+        "description": "Project Description",
+        "status": "Status",
+        "role": "Role",
+        "technologies": "Technologies Used",
+        "features": "Key Features",
+        "achievements": "Achievements",
+        "skills": "Skills Applied",
+        "buttons": {
+          "github": "GitHub Code",
+          "demo": "Live Demo"
+        }
+      },
+      "features": {
+        "cultivation": "Cultivation system with 7 stats: Morality, Root Bone, Spirit Root, Comprehension, Fortune, Talent, Cultivation Quality",
+        "inventory": "Inventory & Equipment system with drag & drop, asynchronous resource loading",
+        "combat": "Real-time combat system with event-driven architecture and critical hit mechanism",
+        "playerManagement": "Player management system using Singleton pattern and JSON serialization",
+        "ui": "UI system with drag & drop and real-time stat updates",
+        "eventBus": "Custom Event Bus system supporting decoupled communication"
+      },
+      "achievements": {
+        "architecture": "Completed entire event-driven architecture with over 50 types of events",
+        "cultivationSystem": "Developed cultivation system that calculates derived stats",
+        "inventorySystem": "Developed drag & drop inventory and equipment system",
+        "optimization": "Optimized performance through caching, asynchronous loading and memory management",
+        "uiDevelopment": "Developed dynamic real-time UI",
+        "toolEditor": "Created Tool Editor for debugging and game data management"
+      },
+      "skills": {
+        "advancedCSharp": "Advanced C#",
+        "unity2D": "Unity 2D",
+        "eventDriven": "Event-driven programming",
+        "tilemap": "Tilemap",
+        "cinemachine": "Cinemachine",
+        "animation2D": "Animation 2D",
+        "jsonSerialization": "JSON serialization",
+        "performanceOptimization": "Performance optimization"
+      }
+    },
+    "skills": {
+      "title": "Technical Skills",
+      "categories": {
+        "gameDevelopment": "Game Development",
+        "toolsTechnologies": "Tools & Technologies", 
+        "softSkills": "Soft Skills"
+      },
+      "skillNames": {
+        "unity": "Unity",
+        "csharp": "C#",
+        "shaderProgramming": "Shader Programming (ShaderLab/HLSL)",
+        "gameplayProgramming": "Gameplay Programming",
+        "gameOptimization": "Game Optimization",
+        "gitGithub": "Git/GitHub",
+        "visualStudio": "Visual Studio",
+        "aseprite": "Aseprite",
+        "photoshop": "Photoshop",
+        "teamwork": "Teamwork & Collaboration",
+        "problemSolving": "Problem Solving",
+        "creativeThinking": "Creative Thinking",
+        "timeManagement": "Time Management",
+        "communication": "Communication",
+        "adaptability": "Adaptability"
+      }
+    },
+    "contact": {
+      "title": "Let's connect!",
+      "description": "I'm always ready to discuss collaboration opportunities, new game projects, or simply share experiences.",
+      "methods": {
+        "email": "Email",
+        "linkedin": "LinkedIn",
+        "github": "GitHub",
+        "phone": "Phone",
+        "zalo": "Zalo",
+        "facebook": "Facebook"
+      }
+    },
+    "footer": {
+      "copyright": "2024 Nông Đức Toàn. All rights reserved."
+    }
+  }
+}
