@@ -12,7 +12,7 @@
         {
           "name": "C#",
           "icon": "fas fa-code",
-          "percentage":68  
+          "percentage":48  
         },
         {
           "name": "Shader Programming (ShaderLab/HLSL)",  
@@ -38,22 +38,22 @@
         {
           "name": "Git/GitHub",
           "icon": "fab fa-git-alt",
-          "percentage":80  
+          "percentage":60  
         },
         {
           "name": "Visual Studio",
           "icon": "fas fa-laptop-code",
-          "percentage": 85
+          "percentage": 62
         },
         {
           "name": "Aseprite",
           "icon": "fas fa-pencil-alt",
-          "percentage": 55
+          "percentage": 45
         },
         {
           "name": "Photoshop",
           "icon": "fas fa-image",
-          "percentage": 70
+          "percentage": 65
         }
       ]
     },
@@ -64,32 +64,32 @@
         {
           "name": "Teamwork & Collaboration",
           "icon": "fas fa-handshake",
-          "percentage": 70
+          "percentage": 50
         },
         {
           "name": "Problem Solving",
           "icon": "fas fa-puzzle-piece",
-          "percentage":85
+          "percentage":62
         },
         {
           "name": "Creative Thinking",
           "icon": "fas fa-lightbulb",
-          "percentage": 88
+          "percentage": 60
         },
         {
           "name": "Time Management",
           "icon": "fas fa-clock",
-          "percentage": 75
+          "percentage": 65
         },
         {
           "name": "Communication",
           "icon": "fas fa-comments",
-          "percentage": 65
+          "percentage": 45
         },
         {
           "name": "Adaptability",
           "icon": "fas fa-sync-alt",
-          "percentage": 82
+          "percentage": 42
         }
       ]
     }
