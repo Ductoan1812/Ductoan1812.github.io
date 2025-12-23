@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải mã & Mã hóa Save File</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            margin: 10px 0;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        button.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        button.danger {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+        button.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .error {
+            color: #dc3545;
+            padding: 15px;
+            background: #ffe6e6;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid #dc3545;
+        }
+        .success {
+            color: #28a745;
+            padding: 15px;
+            background: #e6ffe6;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid #28a745;
+        }
+        .warning {
+            color: #ffc107;
+            padding: 15px;
+            background: #fff9e6;
+            border-radius: 6px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+        }
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 6px 6px 0 0;
+            background: #e9ecef;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            background: #007bff;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Công cụ Giải mã & Mã hóa Save File</h1>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('decode')">🔓 Giải mã</div>
+            <div class="tab" onclick="switchTab('encode')">🔒 Mã hóa</div>
+            <div class="tab" onclick="switchTab('edit')">✏️ Chỉnh sửa</div>
+        </div>
+
+        <!-- TAB GIẢI MÃ -->
+        <div id="decodeTab" class="tab-content active">
+            <div class="section">
+                <h2>📥 Dữ liệu đã mã hóa:</h2>
+                <textarea id="encoded" placeholder="Dán dữ liệu LZ-String Base64 vào đây hoặc click 'Tải từ save.md'..."></textarea>
+                
+                <div class="button-group">
+                    <button onclick="loadFromFile()">📂 Tải từ save.md</button>
+                    <button onclick="decodeLZStringBase64()" class="success">🔓 Giải mã LZ-String Base64</button>
+                    <button onclick="clearAll()" class="danger">🗑️ Xóa tất cả</button>
+                </div>
+            </div>
+
+            <div id="message"></div>
+            
+            <div class="section">
+                <h2>📤 Kết quả giải mã:</h2>
+                <textarea id="decoded" placeholder="Kết quả sẽ hiển thị ở đây..." readonly></textarea>
+                
+                <div class="stats" id="decodeStats" style="display: none;">
+                    <div class="stat-box">
+                        <div class="stat-value" id="decodedLength">0</div>
+                        <div class="stat-label">Ký tự</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="decodedLines">0</div>
+                        <div class="stat-label">Dòng</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="compressionRatio">0%</div>
+                        <div class="stat-label">Tỷ lệ nén</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="copyDecoded()">📋 Copy</button>
+                    <button onclick="downloadDecoded()">💾 Tải xuống</button>
+                    <button onclick="formatJSON()">📐 Format JSON</button>
+                    <button onclick="moveToEdit()" class="warning">✏️ Chuyển sang chỉnh sửa</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB MÃ HÓA -->
+        <div id="encodeTab" class="tab-content">
+            <div class="section">
+                <h2>📝 Dữ liệu gốc (cần mã hóa):</h2>
+                <textarea id="toEncode" placeholder="Nhập hoặc dán dữ liệu cần mã hóa vào đây..."></textarea>
+                
+                <div class="button-group">
+                    <button onclick="encodeLZStringBase64()" class="success">🔒 Mã hóa LZ-String Base64</button>
+                    <button onclick="clearEncode()" class="danger">🗑️ Xóa</button>
+                </div>
+            </div>
+
+            <div id="encodeMessage"></div>
+
+            <div class="section">
+                <h2>🔐 Kết quả mã hóa:</h2>
+                <textarea id="encodedResult" placeholder="Kết quả mã hóa sẽ hiển thị ở đây..." readonly></textarea>
+                
+                <div class="stats" id="encodeStats" style="display: none;">
+                    <div class="stat-box">
+                        <div class="stat-value" id="encodedLength">0</div>
+                        <div class="stat-label">Ký tự sau mã hóa</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="originalLength">0</div>
+                        <div class="stat-label">Ký tự gốc</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="encodeCompressionRatio">0%</div>
+                        <div class="stat-label">Tỷ lệ nén</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="copyEncoded()">📋 Copy kết quả</button>
+                    <button onclick="downloadEncoded()">💾 Tải xuống save.md</button>
+                    <button onclick="saveToBrowser()" class="warning">💿 Lưu vào localStorage</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CHỈNH SỬA -->
+        <div id="editTab" class="tab-content">
+            <div class="section">
+                <h2>✏️ Chỉnh sửa dữ liệu:</h2>
+                <p style="color: #6c757d; font-size: 14px;">Quy trình: Giải mã → Chỉnh sửa → Mã hóa lại</p>
+                
+                <div class="button-group">
+                    <button onclick="loadAndDecode()" class="success">📂 1. Tải & Giải mã save.md</button>
+                </div>
+
+                <textarea id="editArea" placeholder="Dữ liệu đã giải mã sẽ xuất hiện ở đây để chỉnh sửa..."></textarea>
+                
+                <div class="button-group">
+                    <button onclick="formatJSONInEdit()">📐 Format JSON</button>
+                    <button onclick="validateJSON()">✅ Kiểm tra JSON</button>
+                    <button onclick="encodeAndSave()" class="success">🔒 2. Mã hóa & Lưu</button>
+                </div>
+            </div>
+
+            <div id="editMessage"></div>
+
+            <div class="section" id="encodedPreview" style="display: none;">
+                <h2>👁️ Preview mã hóa:</h2>
+                <textarea id="encodedPreviewArea" readonly></textarea>
+                <div class="button-group">
+                    <button onclick="downloadEncodedFromEdit()">💾 Tải xuống save.md mới</button>
+                    <button onclick="copyEncodedFromEdit()">📋 Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tự động load dữ liệu từ save.md khi trang được tải
+        window.onload = function() {
+            // Không tự động load nữa, để user tự chọn
+        };
+
+        function switchTab(tabName) {
+            // Ẩn tất cả tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Hiển thị tab được chọn
+            if (tabName === 'decode') {
+                document.getElementById('decodeTab').classList.add('active');
+                document.querySelectorAll('.tab')[0].classList.add('active');
+            } else if (tabName === 'encode') {
+                document.getElementById('encodeTab').classList.add('active');
+                document.querySelectorAll('.tab')[1].classList.add('active');
+            } else if (tabName === 'edit') {
+                document.getElementById('editTab').classList.add('active');
+                document.querySelectorAll('.tab')[2].classList.add('active');
+            }
+        }
+
+        // ========== TAB GIẢI MÃ ==========
+        function loadFromFile() {
+            fetch('save.md')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('encoded').value = data;
+                    showMessage('✅ Đã tải dữ liệu từ save.md', 'success');
+                })
+                .catch(error => {
+                    showMessage('❌ Lỗi khi tải file: ' + error.message, 'error');
+                });
+        }
+
+        function decodeLZStringBase64() {
+            try {
+                const encoded = document.getElementById('encoded').value.trim();
+                if (!encoded) {
+                    showMessage('⚠️ Vui lòng nhập hoặc tải dữ liệu cần giải mã', 'warning');
+                    return;
+                }
+
+                const decoded = LZString.decompressFromBase64(encoded);
+                if (decoded) {
+                    document.getElementById('decoded').value = decoded;
+                    
+                    // Hiển thị thống kê
+                    document.getElementById('decodeStats').style.display = 'grid';
+                    document.getElementById('decodedLength').textContent = decoded.length.toLocaleString();
+                    document.getElementById('decodedLines').textContent = decoded.split('\n').length.toLocaleString();
+                    const ratio = ((1 - encoded.length / decoded.length) * 100).toFixed(1);
+                    document.getElementById('compressionRatio').textContent = ratio + '%';
+                    
+                    showMessage('✅ Giải mã LZ-String Base64 thành công!', 'success');
+                } else {
+                    showMessage('❌ Không thể giải mã. Dữ liệu có thể không đúng định dạng LZ-String Base64', 'error');
+                }
+            } catch (e) {
+                showMessage('❌ Lỗi LZ-String Base64: ' + e.message, 'error');
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('encoded').value = '';
+            document.getElementById('decoded').value = '';
+            document.getElementById('message').innerHTML = '';
+            document.getElementById('decodeStats').style.display = 'none';
+        }
+
+        function copyDecoded() {
+            const result = document.getElementById('decoded').value;
+            if (!result) {
+                showMessage('⚠️ Không có dữ liệu để copy', 'warning');
+                return;
+            }
+            navigator.clipboard.writeText(result).then(() => {
+                showMessage('✅ Đã copy vào clipboard!', 'success');
+            });
+        }
+
+        function downloadDecoded() {
+            const result = document.getElementById('decoded').value;
+            if (!result) {
+                showMessage('⚠️ Không có dữ liệu để tải xuống', 'warning');
+                return;
+            }
+            const blob = new Blob([result], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'decoded_save.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            showMessage('✅ Đã tải xuống file decoded_save.txt!', 'success');
+        }
+
+        function formatJSON() {
+            try {
+                const result = document.getElementById('decoded').value;
+                const json = JSON.parse(result);
+                const formatted = JSON.stringify(json, null, 2);
+                document.getElementById('decoded').value = formatted;
+                showMessage('✅ Đã format JSON!', 'success');
+            } catch (e) {
+                showMessage('❌ Dữ liệu không phải JSON hợp lệ: ' + e.message, 'error');
+            }
+        }
+
+        function moveToEdit() {
+            const decoded = document.getElementById('decoded').value;
+            if (!decoded) {
+                showMessage('⚠️ Chưa có dữ liệu đã giải mã', 'warning');
+                return;
+            }
+            document.getElementById('editArea').value = decoded;
+            switchTab('edit');
+            showMessageInEdit('✅ Đã chuyển dữ liệu sang tab chỉnh sửa', 'success');
+        }
+
+        // ========== TAB MÃ HÓA ==========
+        function encodeLZStringBase64() {
+            try {
+                const plainText = document.getElementById('toEncode').value;
+                if (!plainText) {
+                    showMessageInEncode('⚠️ Vui lòng nhập dữ liệu cần mã hóa', 'warning');
+                    return;
+                }
+
+                const encoded = LZString.compressToBase64(plainText);
+                document.getElementById('encodedResult').value = encoded;
+                
+                // Hiển thị thống kê
+                document.getElementById('encodeStats').style.display = 'grid';
+                document.getElementById('encodedLength').textContent = encoded.length.toLocaleString();
+                document.getElementById('originalLength').textContent = plainText.length.toLocaleString();
+                const ratio = ((1 - encoded.length / plainText.length) * 100).toFixed(1);
+                document.getElementById('encodeCompressionRatio').textContent = ratio + '%';
+                
+                showMessageInEncode('✅ Mã hóa LZ-String Base64 thành công!', 'success');
+            } catch (e) {
+                showMessageInEncode('❌ Lỗi mã hóa: ' + e.message, 'error');
+            }
+        }
+
+        function clearEncode() {
+            document.getElementById('toEncode').value = '';
+            document.getElementById('encodedResult').value = '';
+            document.getElementById('encodeMessage').innerHTML = '';
+            document.getElementById('encodeStats').style.display = 'none';
+        }
+
+        function copyEncoded() {
+            const result = document.getElementById('encodedResult').value;
+            if (!result) {
+                showMessageInEncode('⚠️ Không có dữ liệu để copy', 'warning');
+                return;
+            }
+            navigator.clipboard.writeText(result).then(() => {
+                showMessageInEncode('✅ Đã copy vào clipboard!', 'success');
+            });
+        }
+
+        function downloadEncoded() {
+            const result = document.getElementById('encodedResult').value;
+            if (!result) {
+                showMessageInEncode('⚠️ Không có dữ liệu để tải xuống', 'warning');
+                return;
+            }
+            const blob = new Blob([result], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'save.md';
+            a.click();
+            URL.revokeObjectURL(url);
+            showMessageInEncode('✅ Đã tải xuống file save.md!', 'success');
+        }
+
+        function saveToBrowser() {
+            const result = document.getElementById('encodedResult').value;
+            if (!result) {
+                showMessageInEncode('⚠️ Không có dữ liệu để lưu', 'warning');
+                return;
+            }
+            localStorage.setItem('saved_game', result);
+            showMessageInEncode('✅ Đã lưu vào localStorage của trình duyệt!', 'success');
+        }
+
+        // ========== TAB CHỈNH SỬA ==========
+        function loadAndDecode() {
+            fetch('save.md')
+                .then(response => response.text())
+                .then(data => {
+                    const decoded = LZString.decompressFromBase64(data);
+                    if (decoded) {
+                        document.getElementById('editArea').value = decoded;
+                        showMessageInEdit('✅ Đã tải và giải mã save.md thành công! Bạn có thể chỉnh sửa bên dưới.', 'success');
+                    } else {
+                        showMessageInEdit('❌ Không thể giải mã file save.md', 'error');
+                    }
+                })
+                .catch(error => {
+                    showMessageInEdit('❌ Lỗi khi tải file: ' + error.message, 'error');
+                });
+        }
+
+        function formatJSONInEdit() {
+            try {
+                const content = document.getElementById('editArea').value;
+                const json = JSON.parse(content);
+                const formatted = JSON.stringify(json, null, 2);
+                document.getElementById('editArea').value = formatted;
+                showMessageInEdit('✅ Đã format JSON!', 'success');
+            } catch (e) {
+                showMessageInEdit('❌ Dữ liệu không phải JSON hợp lệ: ' + e.message, 'error');
+            }
+        }
+
+        function validateJSON() {
+            try {
+                const content = document.getElementById('editArea').value;
+                JSON.parse(content);
+                showMessageInEdit('✅ JSON hợp lệ! Bạn có thể mã hóa và lưu.', 'success');
+            } catch (e) {
+                showMessageInEdit('❌ JSON không hợp lệ: ' + e.message, 'error');
+            }
+        }
+
+        function encodeAndSave() {
+            try {
+                const content = document.getElementById('editArea').value;
+                if (!content) {
+                    showMessageInEdit('⚠️ Không có dữ liệu để mã hóa', 'warning');
+                    return;
+                }
+
+                const encoded = LZString.compressToBase64(content);
+                document.getElementById('encodedPreviewArea').value = encoded;
+                document.getElementById('encodedPreview').style.display = 'block';
+                
+                showMessageInEdit('✅ Đã mã hóa thành công! Xem preview bên dưới và tải xuống.', 'success');
+            } catch (e) {
+                showMessageInEdit('❌ Lỗi mã hóa: ' + e.message, 'error');
+            }
+        }
+
+        function downloadEncodedFromEdit() {
+            const result = document.getElementById('encodedPreviewArea').value;
+            if (!result) {
+                showMessageInEdit('⚠️ Chưa có dữ liệu đã mã hóa', 'warning');
+                return;
+            }
+            const blob = new Blob([result], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'save.md';
+            a.click();
+            URL.revokeObjectURL(url);
+            showMessageInEdit('✅ Đã tải xuống file save.md mới!', 'success');
+        }
+
+        function copyEncodedFromEdit() {
+            const result = document.getElementById('encodedPreviewArea').value;
+            if (!result) {
+                showMessageInEdit('⚠️ Chưa có dữ liệu đã mã hóa', 'warning');
+                return;
+            }
+            navigator.clipboard.writeText(result).then(() => {
+                showMessageInEdit('✅ Đã copy vào clipboard!', 'success');
+            });
+        }
+
+        // ========== HÀM HIỂN THỊ THÔNG BÁO ==========
+        function showMessage(msg, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = `<div class="${type}">${msg}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        function showMessageInEncode(msg, type) {
+            const messageDiv = document.getElementById('encodeMessage');
+            messageDiv.innerHTML = `<div class="${type}">${msg}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        function showMessageInEdit(msg, type) {
+            const messageDiv = document.getElementById('editMessage');
+            messageDiv.innerHTML = `<div class="${type}">${msg}</div>`;
+            setTimeout(() => {
+                messageDiv.innerHTML = '';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

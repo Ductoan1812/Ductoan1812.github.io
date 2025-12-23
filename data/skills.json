@@ -7,27 +7,27 @@
         {
           "name": "Unity",
           "icon": "fab fa-unity",
-          "percentage": 85  
+          "percentage": 45  
         },
         {
           "name": "C#",
           "icon": "fas fa-code",
-          "percentage": 90  
+          "percentage":68  
         },
         {
           "name": "Shader Programming (ShaderLab/HLSL)",  
           "icon": "fas fa-paint-brush",
-          "percentage": 75 
+          "percentage": 40 
         },
         {
           "name": "Gameplay Programming", 
           "icon": "fas fa-code-branch",
-          "percentage": 80
+          "percentage": 40
         },
         {
           "name": "Game Optimization",
           "icon": "fas fa-tachometer-alt",
-          "percentage": 70
+          "percentage": 43
         }
       ]
     },
@@ -38,7 +38,7 @@
         {
           "name": "Git/GitHub",
           "icon": "fab fa-git-alt",
-          "percentage": 85  
+          "percentage":80  
         },
         {
           "name": "Visual Studio",
@@ -48,7 +48,7 @@
         {
           "name": "Aseprite",
           "icon": "fas fa-pencil-alt",
-          "percentage": 65
+          "percentage": 55
         },
         {
           "name": "Photoshop",
@@ -64,12 +64,12 @@
         {
           "name": "Teamwork & Collaboration",
           "icon": "fas fa-handshake",
-          "percentage": 85
+          "percentage": 70
         },
         {
           "name": "Problem Solving",
           "icon": "fas fa-puzzle-piece",
-          "percentage": 90
+          "percentage":85
         },
         {
           "name": "Creative Thinking",
@@ -79,12 +79,12 @@
         {
           "name": "Time Management",
           "icon": "fas fa-clock",
-          "percentage": 80
+          "percentage": 75
         },
         {
           "name": "Communication",
           "icon": "fas fa-comments",
-          "percentage": 85
+          "percentage": 65
         },
         {
           "name": "Adaptability",
